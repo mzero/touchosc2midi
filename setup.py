@@ -3,7 +3,7 @@
 from setuptools import setup
 from touchosc2midi import __version__
 
-install_requires = ['pyliblo', 'python-rtmidi', 'mido', 'docopt', 'netifaces']
+install_requires = ['pyliblo', 'python-rtmidi', 'mido', 'docopt', 'netifaces', 'zeroconf']
 
 setup(name='touchosc2midi',
       version=__version__,
