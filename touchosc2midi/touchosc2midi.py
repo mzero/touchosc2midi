@@ -17,6 +17,8 @@ Options:
 
 from __future__ import absolute_import
 
+from threading import Event
+
 import logging
 import socket
 import time
@@ -176,8 +178,7 @@ def main():
 
             log.info("Listening for midi at {}.".format(midi_in))
             server.start()
-            while True:
-                time.sleep(.0001)
+            Event().wait()
         except KeyboardInterrupt:
             psa.unregister()
             psa.close()
