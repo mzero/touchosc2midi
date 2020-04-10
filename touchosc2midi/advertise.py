@@ -25,6 +25,17 @@ def default_route_interface():
         log.debug("found '{}:{}' as default route.".format(name, ip))
         return ip
     else:
+        for intf in netifaces.interfaces():
+            allAddrs = netifaces.ifaddresses(intf)
+            if not netifaces.AF_INET in allAddrs:
+                continue
+            for addr in allAddrs[netifaces.AF_INET]:
+                ip = addr['addr']
+                if ip.startswith('169.254') or ip.startswith('127'):
+                    continue
+                log.debug("found '{}:{}' as default route.".format(intf, ip))
+                return ip
+
         raise RuntimeError("default interface not found. Check your network or use --ip switch.")
 
 
