@@ -132,7 +132,7 @@ def wait_for_target_address(ip=None):
     """
     log.info("Waiting for first package from touchOSC in order to setup target address...")
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.bind((ip or default_route_interface(), PORT))
+    s.bind(('', PORT)) # '' represents INADDR_ANY
     _, (address, _) = s.recvfrom(1)
     return address
 
