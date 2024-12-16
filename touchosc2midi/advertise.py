@@ -48,7 +48,7 @@ def build_service_info(ip):
                            socket.gethostname(),
                            TOUCHOSC_BRIDGE
                        ),
-                       address=socket.inet_aton(ip),
+                       addresses=[socket.inet_aton(ip)],
                        port=PORT,
                        properties=dict(),
                        server=socket.gethostname() + '.local.')
@@ -97,7 +97,8 @@ class Advertisement(object):
     def get_ip(self):
         """:return: the service's IP as a string.
         """
-        return socket.inet_ntoa(self.info.address)
+        return socket.inet_ntoa(self.info.addresses[0]) \
+            if len(self.info.addresses) > 0 else "--none--"
 
     ip = property(get_ip)
 
